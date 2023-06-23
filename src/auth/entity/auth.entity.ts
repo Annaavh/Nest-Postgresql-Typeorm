@@ -16,6 +16,7 @@ export class Auth {
   @Column()
   password: string;
 
+  @Exclude()
   @IsOptional()
   @Column({ nullable: true })
   hashedRt: string;

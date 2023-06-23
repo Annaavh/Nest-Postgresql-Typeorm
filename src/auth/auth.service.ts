@@ -13,6 +13,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async getAllUsers(){
+    return await this.userRepository.find()
+  }
+
   async signinLocal(dto: AuthDto) {
     const user = await this.findByEmail(dto.email);
     console.log(user, '-- user');
@@ -115,6 +119,7 @@ export class AuthService {
     const salt = bcrypt.genSaltSync(saltRounds);
     return bcrypt.hashSync(data, salt);
   }
+
   findByEmail(email: string) {
     return this.userRepository.findOneBy({ email });
   }

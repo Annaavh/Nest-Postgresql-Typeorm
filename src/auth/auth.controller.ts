@@ -5,6 +5,7 @@ import {
   Controller,
   ConflictException,
   Delete,
+  Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
@@ -14,9 +15,16 @@ import { AuthGuard } from '@nestjs/passport';
 import { AtGuard } from '../common/guards/at.guard';
 import { GetCurrentUser } from 'src/common/decorators/get-current-user';
 import { RtGuard } from 'src/common/guards/rt.guard';
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @Get()
+  async getAllUsers() {
+    const users = await this.authService.getAllUsers();
+    return users.map(({ id, email }) => ({ id, email }));
+  }
 
   @Post('local/signup')
   async signup(@Body() dto: AuthDto) {
