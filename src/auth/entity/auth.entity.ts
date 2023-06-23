@@ -1,6 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import { IsOptional } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Products } from 'src/products/entity/products.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Auth {
@@ -20,4 +21,7 @@ export class Auth {
   @IsOptional()
   @Column({ nullable: true })
   hashedRt: string;
+
+  @OneToMany(()=>Products,product => product.user)
+  products:Products[];
 }

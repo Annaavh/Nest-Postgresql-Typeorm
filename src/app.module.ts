@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './products/products.module';
 import config from '../ormconfig';
 
 @Module({
@@ -21,6 +22,7 @@ import config from '../ormconfig';
     }),
     PostsModule,
     AuthModule,
+    ProductsModule,
   ],
   controllers: [AuthController],
   providers: [],
